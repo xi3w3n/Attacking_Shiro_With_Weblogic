@@ -5,5 +5,5 @@ public enum PayloadType {
     Echo,
     Memshell,
     TemplatesImplTest,         //不成功
-    FileOutputStreamTest;      //不成功
+    FileOutputStreamTest, Cmd2883, Echo2883;      //不成功
 }

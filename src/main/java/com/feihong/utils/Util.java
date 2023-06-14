@@ -8,11 +8,12 @@ public class Util {
         ByteArrayOutputStream baous = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baous);
         oos.writeObject(obj);
-
+        oos.flush();
+        oos.close();
         return baous.toByteArray();
     }
 
-    public static void deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
+    public static void deserialize(byte[] bytes) throws Exception {
         //反序列化
         ByteArrayInputStream bains = new ByteArrayInputStream(bytes);
         ObjectInputStream ois = new ObjectInputStream(bains);
